@@ -1,5 +1,14 @@
 <template>
-  <header></header>
+  <header>
+    <div>
+      <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+        <div class="d-flex align-items-center">
+          <i class="mdi mdi-account-cowboy-hat ms-1"></i>
+          <p class="p-0 m-0 ms-2">Get on Home</p>
+        </div>
+      </router-link>
+    </div>
+  </header>
   <main>
     <router-view />
     <button

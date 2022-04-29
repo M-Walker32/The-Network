@@ -13,23 +13,23 @@
             class="p-4 rounded-circle h-25"
             src="http://thiscatdoesnotexist.com"
           />
-          <h1>Name:</h1>
-          <h2>class:</h2>
+          <h1>Name: {{ profile.name }}</h1>
+          <!-- <h2>Class: {{ profile.class }}</h2> -->
           <p>
-            bio here Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Quam nostrum, magnam dolorum magni tempore quas laborum ea accusamus
-            expedita impedit molestiae sunt, repellat eos blanditiis maiores
-            eius dolore voluptatem suscipit.
+            <!-- {{ profile.bio }} -->
           </p>
-          <i class="mdi mdi-github"></i>
+          <i class="selectable mdi mdi-github"> </i>
           <i class="mdi mdi-linkedin"></i>
           <!-- create ternary to show if graduated -->
+          <!-- <div v-if="profile.graduated"> -->
           <i class="mdi mdi-school"></i>
+          <!-- </div> -->
         </div>
         <div class="col-8">
           <img class="w-100 h-25" src="http://thiscatdoesnotexist.com" alt="" />
           <!-- put in profile deatils here -->
-          <p>profile details go here</p>
+          <p>profile posts go here</p>
+          <Post v-for="p in posts" :key="p.id" :post="p" />
           <!-- this will need to be filtered to just this users posts -->
         </div>
       </div>
@@ -44,11 +44,17 @@ import { useRoute } from "vue-router";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { profilesService } from "../services/ProfileService.js";
+import { AppState } from "../AppState.js";
+import { postsService } from "../services/PostService.js";
+
 export default {
+  // components: { Post },
   setup() {
     const route = useRoute();
     onMounted(async () => {
       try {
+        await postsService.getByQuery({ creatorId: route.params.id });
+        // logger.log(route.params.id);
         await profilesService.getProfile(route.params.id);
       } catch (error) {
         logger.error(error);
@@ -56,9 +62,10 @@ export default {
       }
     });
     return {
-      // profile: computed(() => AppState.activeProfile),
-      // posts: computed(() => AppState.searchResults),
+      profile: computed(() => AppState.activeProfile),
+      posts: computed(() => AppState.searchResults),
       account: computed(() => AppState.account),
+      route,
     };
   },
 };
