@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <!-- Create a post compnenet, write v-for loop, grap posts from api -->
+        <!-- Create a new post -->
+        <CreatePostForm />
         <Post v-for="p in posts" :key="p.id" :post="p" />
       </div>
     </div>
@@ -38,4 +39,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.profileimg {
+  padding: 2em;
+  border-radius: 50%;
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: cover;
+}
 </style>
