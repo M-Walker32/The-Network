@@ -1,6 +1,9 @@
 <template>
-  <div class="col-12 d-flex rounded border-dark m-3 bg-light" id="Post">
-    <img class="p-4 rounded-circle h-25" :src="post.creator.picture" />
+  <div class="d-flex rounded border-dark m-2 bg-light" id="Post">
+    <img
+      class="p-4 rounded-circle img-fluid w-25"
+      :src="post.creator.picture"
+    />
     <div class="p-4">
       <h5 class="selectable" @click="goToProfile()">{{ post.creator.name }}</h5>
       <small class="muted">{{ post.createdAt }}</small>

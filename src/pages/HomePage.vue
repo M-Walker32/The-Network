@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <div class="row">
-      <!-- Create a post compnenet, write v-for loop, grap posts from api -->
-      <Post v-for="p in posts" :key="p.id" :post="p" />
+      <div class="col-12">
+        <!-- Create a post compnenet, write v-for loop, grap posts from api -->
+        <Post v-for="p in posts" :key="p.id" :post="p" />
+      </div>
     </div>
   </div>
 </template>

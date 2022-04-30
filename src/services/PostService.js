@@ -10,11 +10,11 @@ class PostsService {
     AppState.posts = res.data.posts
   }
 
-  async getByQuery(creatorId){
-    const res = await api.get('api/posts', {creatorId})
-    // this is the array of 20+ items
-    logger.log(res.data)
-    AppState.results = res.data
+  async getByQuery(id){
+    const res = await api.get('api/profiles/'+ id +'/posts')
+    // const res = await api.get('api/posts/', {params})
+    logger.log(res.data.posts)
+    AppState.searchResults = res.data.posts
   }
 }
 
