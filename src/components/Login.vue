@@ -1,45 +1,42 @@
 <template>
-  <span class="navbar-text">
+  <span class="">
     <button
-      class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
+      class="btn selectable text-success lighten-30 text-uppercase"
       @click="login"
       v-if="!user.isAuthenticated"
     >
       Login
     </button>
 
-    <div class="dropdown my-2 my-lg-0" v-else>
-      <div
-        class="dropdown-toggle selectable"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        id="authDropdown"
-      >
-        <div v-if="account.picture">
-          <img
-            :src="account.picture"
-            alt="account photo"
-            height="40"
-            class="rounded"
-          />
-          <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
-        </div>
-      </div>
-      <div
-        class="dropdown-menu p-0 list-group w-100"
-        aria-labelledby="authDropdown"
-      >
-        <router-link :to="{ name: 'Account' }">
-          <div class="list-group-item list-group-item-action hoverable">
-            Manage Account
-          </div>
-        </router-link>
+    <div class="dropdown" v-else>
+      <div class="bg-primary p-3 rounded">
         <div
-          class="list-group-item list-group-item-action hoverable text-danger"
-          @click="logout"
+          class="dropdown-toggle selectable"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          id="authDropdown"
         >
-          <i class="mdi mdi-logout"></i>
-          logout
+          <div v-if="account.picture">
+            <img
+              :src="account.picture"
+              alt="account photo"
+              height="40"
+              class="rounded p-2"
+            />
+            <span class="text-primary lighten-30">{{ account.name }}</span>
+          </div>
+        </div>
+        <div
+          class="dropdown-menu list-group w-100"
+          aria-labelledby="authDropdown"
+        >
+          <div
+            class="list-group-item list-group-item-action hoverable text-dark"
+            @click="logout"
+          >
+            <i class="mdi mdi-logout"></i>
+            logout
+          </div>
         </div>
       </div>
     </div>

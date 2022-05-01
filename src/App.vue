@@ -2,19 +2,17 @@
   <header>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 d-flex bg-dark p-4 space-between">
+        <div class="col-12 d-flex bg-primary p-4 space-between">
           <div class="Home">
-            <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+            <router-link
+              class="navbar-brand text-dark d-flex"
+              :to="{ name: 'Home' }"
+            >
               <div class="d-flex align-items-center">
                 <i class="mdi mdi-account-cowboy-hat ms-1"></i>
                 <p class="p-0 m-0 ms-2">Get on Home</p>
               </div>
             </router-link>
-          </div>
-
-          <div class="search d-flex align-items-start">
-            <p class="p-2">Search:</p>
-            <input />
           </div>
         </div>
       </div>
@@ -22,11 +20,9 @@
   </header>
   <main>
     <router-view />
-    <button
-      class="float btn btn-primary align-items-center justify-content-center"
-    >
+    <div class="float">
       <Login />
-    </button>
+    </div>
   </main>
   <footer></footer>
 </template>

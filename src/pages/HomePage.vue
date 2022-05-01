@@ -3,7 +3,12 @@
     <div class="row">
       <div class="col-12">
         <!-- Create a new post -->
-        <CreatePostForm />
+        <div v-if="account.id">
+          <CreatePostForm />
+        </div>
+        <div class="bg-primary rounded m-3">
+          <SearchForm />
+        </div>
         <Post v-for="p in posts" :key="p.id" :post="p" />
       </div>
     </div>
@@ -33,6 +38,7 @@ export default {
     return {
       // return stuff here
       posts: computed(() => AppState.posts),
+      account: computed(() => AppState.account),
     };
   },
 };

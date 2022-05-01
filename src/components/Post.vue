@@ -8,14 +8,16 @@
         />
       </div>
       <div class="p-4 col-8">
-        <h5 class="selectable" @click="goToProfile">
-          {{ post.creator.name }}
-        </h5>
-        <div class="text-end" v-if="post.creatorId == account.id">
-          <i class="mdi mdi-delete selectable" @click="deletePost()"></i>
+        <div class="d-flex">
+          <h5 class="selectable" @click="goToProfile">
+            {{ post.creator.name }}
+          </h5>
+          <div v-if="post.creatorId == account.id">
+            <i class="mdi mdi-delete selectable" @click="deletePost()"></i>
+          </div>
         </div>
-        <small class="muted ms-2">{{ post.createdAt }}</small>
-        <img class="postimg" :src="post.imgUrl" />
+        <small class="muted">Created on: {{ date }}</small>
+        <img class="postimg col-12" :src="post.imgUrl" />
         <p class="m-0 p-0">{{ post.body }}</p>
         <!-- here is the like button -->
         <h5>
@@ -43,6 +45,7 @@ export default {
     },
   },
   setup(props) {
+    const date = new Date(props.post.createdAt).toDateString();
     const route = useRoute();
     const router = useRouter();
     return {
@@ -72,6 +75,7 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
+      date,
       account: computed(() => AppState.account),
     };
   },

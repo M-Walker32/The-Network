@@ -9,10 +9,16 @@ class PostsService {
     // logger.log(res.data.posts)
     AppState.posts = res.data.posts
   }
-
+  async search(query){
+    const res = await api.get('api/posts/?query='+ query)
+    logger.log(res.data.posts)
+    AppState.posts = res.data.posts
+    // AppState.movies = res.data.results.map(m => new Movie(m))
+    // AppState.totalPages = res.data.total_pages
+    // AppState.currentPage = res.data.page
+  }
   async getByQuery(id){
     const res = await api.get('api/profiles/'+ id +'/posts')
-    // const res = await api.get('api/posts/', {params})
     logger.log(res.data.posts)
     AppState.searchResults = res.data.posts
   }
@@ -26,9 +32,6 @@ class PostsService {
     logger.log(post)
     const res = await api.delete('api/posts/'+ post)
     logger.log(res)
-    // AppState.posts.splice(i,1)
-    // AppState.posts = AppState.posts
-    // await api.delete('api/posts/'+ post)
   }
   async likePost(like) {
     // this will be an edit request? to add a likeId to the array of the post

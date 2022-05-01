@@ -1,13 +1,9 @@
 <template>
   <div class="postmaker w-100 d-flex align-items-center">
-    <img
-      class="profileimg"
-      src="http://thiscatdoesnotexist.com"
-      title="profilepic"
-    />
+    <img class="profileimg" :src="account.picture" title="profilepic" />
     <form @submit.prevent="createPost" class="w-100 p-3">
       <div class="form-group m-2">
-        <label for="image url">Image Url:</label>
+        <label for="image url" class="text-primary py-2">Image Url:</label>
         <input
           type="url"
           class="form-control"
@@ -18,26 +14,27 @@
       </div>
 
       <div class="form-group m-2">
-        <label for="body">What is up?</label>
+        <label for="body" class="text-primary py-2">What is up?</label>
         <textarea
           class="form-control"
           id="body"
           v-model="newPost.body"
           rows="3"
-          placeholder="Your message to the internets goes here..."
+          placeholder="Your message to the world wide web..."
         ></textarea>
       </div>
-      <button type="submit" class="">Post</button>
+      <button type="submit" class="btn btn-primary text-dark m-2">Post</button>
     </form>
   </div>
 </template>
 
 
 <script>
-import { ref, watchEffect } from "@vue/runtime-core";
+import { computed, ref, watchEffect } from "@vue/runtime-core";
 import { postsService } from "../services/PostService.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
+import { AppState } from "../AppState.js";
 export default {
   setup() {
     const newPost = ref({});
@@ -54,6 +51,7 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
+      account: computed(() => AppState.account),
     };
   },
 };
