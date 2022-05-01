@@ -2,17 +2,18 @@
   <div class="d-flex col-12 rounded border-dark w-100 mt-4 bg-light" id="Post">
     <div class="row">
       <div class="col-3">
-        <img
-          class="p-4 rounded-circle img-fluid w-100"
-          :src="post.creator.picture"
-        />
+        <router-link
+          :to="{ name: 'ProfilePage', params: { id: post.creator.id } }"
+        >
+          <img
+            class="p-4 rounded-circle img-fluid w-100"
+            :src="post.creator.picture"
+          />
+        </router-link>
       </div>
       <div class="p-4 col-8">
         <div class="d-flex">
-          <h5
-            class="selectable text-secondary text-uppercase"
-            @click="goToProfile"
-          >
+          <h5 class="text-secondary text-uppercase">
             {{ post.creator.name }}
           </h5>
           <div v-if="post.creatorId == account.id">

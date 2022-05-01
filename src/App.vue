@@ -72,11 +72,11 @@ export default {
 @import "./assets/scss/main.scss";
 
 .profileimg {
-  padding: 2em;
   border-radius: 50%;
   max-width: 300px;
   max-height: 300px;
   object-fit: cover;
+  box-shadow: 5px 5px 5px rgba(48, 48, 48, 0.522);
 }
 .postimg {
   padding: 2em;

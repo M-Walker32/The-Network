@@ -1,6 +1,11 @@
 <template>
   <div class="postmaker w-100 d-flex align-items-center">
-    <img class="profileimg" :src="account.picture" title="profilepic" />
+    <div class="di">
+      <router-link :to="{ name: 'ProfilePage', params: { id: account.id } }">
+        <img class="profileimg" :src="account.picture" />
+      </router-link>
+      <h1 class="text-primary text-center">{{ account.name }}</h1>
+    </div>
     <form @submit.prevent="createPost" class="w-100 p-3">
       <div class="form-group m-2">
         <label for="image url" class="text-primary py-2">Image Url:</label>
