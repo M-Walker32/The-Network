@@ -1,5 +1,6 @@
 <template>
-  <div class="mt-3" v-if="totalPages">
+  <!--  -->
+  <div class="mt-3" v-if="totalPages > 1">
     <h4>
       <i
         class="mdi mdi-chevron-left text-dark"
@@ -9,7 +10,7 @@
         }"
         @click="changePage(-1)"
       ></i>
-      {{ currentPage }} of {{ totalPages }}
+      {{ currentPage }}
       <i
         class="mdi mdi-chevron-right text-dark"
         :class="{
@@ -24,6 +25,10 @@
 
 
 <script>
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
+import { postsService } from "../services/PostService.js";
 export default {
   setup() {
     return {

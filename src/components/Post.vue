@@ -9,7 +9,10 @@
       </div>
       <div class="p-4 col-8">
         <div class="d-flex">
-          <h5 class="selectable" @click="goToProfile">
+          <h5
+            class="selectable text-secondary text-uppercase"
+            @click="goToProfile"
+          >
             {{ post.creator.name }}
           </h5>
           <div v-if="post.creatorId == account.id">

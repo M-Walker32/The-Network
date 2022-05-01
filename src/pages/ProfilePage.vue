@@ -115,6 +115,9 @@
       </form>
     </div>
   </div>
+  <footer class="bg-primary mt-3 h-25 p-2 text-end">
+    <Pager />
+  </footer>
 </template>
 
 
