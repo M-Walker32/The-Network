@@ -2,25 +2,48 @@ import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
-
+const params ={
+  query: null,
+  creatorId: null,
+  page: 1
+}
 class PostsService {
   async getAll(){
     const res = await api.get('api/posts')
-    // logger.log(res.data.posts)
     AppState.posts = res.data.posts
+    AppState.totalPages = res.data.totalPages
+    AppState.currentPage = 1
+    // logger.log('total pages', AppState.totalPages, 'currentpage', AppState.currentPage)
   }
   async search(query){
-    const res = await api.get('api/posts/?query='+ query)
-    logger.log(res.data.posts)
+    params.query = query
+    params.page = 1
+    params.creatorId = null
+    // const res = await api.get('api/posts/?query='+ query)
+    const res = await api.get('api/posts', {params})
+    // logger.log(res.data.posts)
     AppState.posts = res.data.posts
-    // AppState.movies = res.data.results.map(m => new Movie(m))
-    // AppState.totalPages = res.data.total_pages
-    // AppState.currentPage = res.data.page
+    AppState.totalPages = res.data.totalPages
+  }
+  async changePage(page){
+    // This does not work on the profile page because im making the creatordId null, but if i don't do that I cna't swicth pages on the homepage
+    params.page = page
+    params.query = null
+    params.creatorId = null
+    const res = await api.get('api/posts/',{params})
+    // const res = await api.get('api/posts/?page='+ page)
+    AppState.posts = res.data.posts
+    AppState.currentPage = page
   }
   async getByQuery(id){
-    const res = await api.get('api/profiles/'+ id +'/posts')
-    logger.log(res.data.posts)
+    params.creatorId = id
+    params.page = 1
+    AppState.currentPage = 1
+    const res = await api.get('api/posts/', {params})
+    // logger.log('this is hopefully an array of posts', res.data.posts)
+    // logger.log('profile total pages:',res.data.totalPages)
     AppState.searchResults = res.data.posts
+    AppState.totalPages = res.data.totalPages
   }
   async createPost(newPost){
     const res = await api.post('api/posts', newPost)
