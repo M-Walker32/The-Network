@@ -14,6 +14,15 @@
                 <p class="p-0 m-0 ms-2">Get on Home</p>
               </div>
             </router-link>
+            <!-- <router-link
+              class="navbar-brand text-dark d-flex"
+              :to="{ name: 'Profile' }"
+            >
+              <div class="d-flex align-items-center">
+                <i class="mdi mdi-account-cowboy-hat ms-1"></i>
+                <p class="p-0 m-0 ms-2">My Profile</p>
+              </div>
+            </router-link> -->
           </div>
           <div class="col-6 d-flex">
             <Billboard v-for="b in billboards" :key="b.id" :billboard="b" />

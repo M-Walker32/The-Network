@@ -1,25 +1,31 @@
 <template>
   <!--  -->
   <div class="mt-3" v-if="totalPages > 1">
-    <h4>
-      <i
-        class="mdi mdi-chevron-left text-dark"
+    <div class="d-flex text-right justify-content-end">
+      <h5
+        class="text-dark"
         :class="{
           selectable: currentPage > 1,
-          'lighten-50': currentPage == 1,
+          'lighten-10': currentPage == 1,
         }"
         @click="changePage(-1)"
-      ></i>
-      {{ currentPage }}
-      <i
-        class="mdi mdi-chevron-right text-dark"
+      >
+        back
+      </h5>
+      <div class="h5 px-2">
+        {{ currentPage }}
+      </div>
+      <h5
+        class="text-dark"
         :class="{
           selectable: currentPage != totalPages,
-          'lighten-50': currentPage == totalPages,
+          'lighten-10': currentPage == totalPages,
         }"
         @click="changePage(1)"
-      ></i>
-    </h4>
+      >
+        next
+      </h5>
+    </div>
   </div>
 </template>
 

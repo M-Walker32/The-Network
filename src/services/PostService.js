@@ -34,7 +34,7 @@ class PostsService {
     // This does not work on the profile page because im making the creatordId null, but if i don't do that I cna't swicth pages on the homepage
     params.page = page
     params.query = null
-    const res = await api.get('api/posts/',{params})
+    const res = await api.get('api/posts/', JSON.stringify(params))
     // const res = await api.get('api/posts/?page='+ page)
     // The page content is not chnaging on the profile but it is on the home page and but the network link is correct
     logger.log('1',res.data, '2', res.data.posts)
@@ -50,6 +50,7 @@ class PostsService {
     const res = await api.get('api/posts/', {params})
     // logger.log('this is hopefully an array of posts', res.data.posts)
     // logger.log('profile total pages:',res.data.totalPages)
+    AppState.posts = res.data.posts
     AppState.searchResults = res.data.posts
     AppState.totalPages = res.data.totalPages
   }
