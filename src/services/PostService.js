@@ -21,18 +21,26 @@ class PostsService {
     params.creatorId = null
     // const res = await api.get('api/posts/?query='+ query)
     const res = await api.get('api/posts', {params})
-    // logger.log(res.data.posts)
     AppState.posts = res.data.posts
     AppState.totalPages = res.data.totalPages
+  }
+  async clearParams(){
+    params.creatorId = null
+    params.page = 1
+    params.query = null
+    logger.log({params})
   }
   async changePage(page){
     // This does not work on the profile page because im making the creatordId null, but if i don't do that I cna't swicth pages on the homepage
     params.page = page
     params.query = null
-    params.creatorId = null
     const res = await api.get('api/posts/',{params})
     // const res = await api.get('api/posts/?page='+ page)
+    // The page content is not chnaging on the profile but it is on the home page and but the network link is correct
+    logger.log('1',res.data, '2', res.data.posts)
+    logger.log({params})
     AppState.posts = res.data.posts
+    AppState.searchResults = res.data.posts    
     AppState.currentPage = page
   }
   async getByQuery(id){
