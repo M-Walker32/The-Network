@@ -76,7 +76,7 @@ export default {
   max-width: 300px;
   max-height: 300px;
   object-fit: cover;
-  box-shadow: 5px 5px 5px rgba(48, 48, 48, 0.522);
+  // box-shadow: 5px 5px rgba(48, 48, 48, 0.522);
 }
 .postimg {
   padding: 2em;
