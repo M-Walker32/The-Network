@@ -6,7 +6,7 @@ import { api } from "./AxiosService.js"
 class AdsService {
   async getBills(){
     const res = await api.get('api/ads')
-    logger.log(res.data)
+    // logger.log(res.data)
     AppState.billboards = res.data
   }
 }

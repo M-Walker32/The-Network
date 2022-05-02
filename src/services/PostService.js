@@ -1,5 +1,7 @@
+import { applyStyles } from "@popperjs/core"
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js"
+import Pop from "../utils/Pop.js"
 import { api } from "./AxiosService.js"
 
 const params ={
@@ -18,7 +20,7 @@ class PostsService {
   async search(query){
     params.query = query
     params.page = 1
-    params.creatorId = null
+    // params.creatorId = null
     // const res = await api.get('api/posts/?query='+ query)
     const res = await api.get('api/posts', {params})
     AppState.posts = res.data.posts
@@ -34,13 +36,14 @@ class PostsService {
     // This does not work on the profile page because im making the creatordId null, but if i don't do that I cna't swicth pages on the homepage
     params.page = page
     params.query = null
-    const res = await api.get('api/posts/', JSON.stringify(params))
+    params
+    const res = await api.get('api/posts/', {params})
     // const res = await api.get('api/posts/?page='+ page)
     // The page content is not chnaging on the profile but it is on the home page and but the network link is correct
     logger.log('1',res.data, '2', res.data.posts)
     logger.log({params})
     AppState.posts = res.data.posts
-    AppState.searchResults = res.data.posts    
+    AppState.searchResults = res.data.posts
     AppState.currentPage = page
   }
   async getByQuery(id){
@@ -53,22 +56,42 @@ class PostsService {
     AppState.posts = res.data.posts
     AppState.searchResults = res.data.posts
     AppState.totalPages = res.data.totalPages
+    logger.log('profile',res.data)
   }
   async createPost(newPost){
     const res = await api.post('api/posts', newPost)
     // logger.log(res.data)
     AppState.posts.push(res.data)
+    this.getAll()
   }
 
   async deletePost(post) {
-    logger.log(post)
+    // logger.log(post)
     const res = await api.delete('api/posts/'+ post)
-    logger.log(res)
+    // logger.log(res)
+    this.getAll()
   }
-  async likePost(like) {
-    // this will be an edit request? to add a likeId to the array of the post
-    const res = await api.put('api/posts/'+ id, like)
-    logger.log(res.data)
+  async likePost(post) {
+    // account pushed into likes
+    const account = AppState.account
+    // find post that matches function parmater
+    const foundPost = AppState.posts.find(p => p.id === post.id)
+    logger.log(foundPost)
+    // find post in liked post array
+    const likedPost = AppState.liked.find(p => p.id === post.id)
+    logger.log(likedPost)
+    if (likedPost){
+        foundPost.likes.splice(0,1)
+        AppState.liked = []
+        Pop.toast("unliked", "success");
+    }
+    else{
+      foundPost.likes.push(account)
+      AppState.liked.push(foundPost)
+      const res = await api.post('api/posts/'+ foundPost.id + '/like', account)
+     AppState.posts.push(res.data)
+      Pop.toast("liked", "success");
+    }
   }
 }
 

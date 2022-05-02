@@ -9,6 +9,7 @@ export const AppState = reactive({
   searchResults: {},
   Posts: {},
   billboards: {},
+  liked:[],
   totalPages: 0,
   currentPage: 1
 })

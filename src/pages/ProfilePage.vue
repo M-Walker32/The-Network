@@ -64,8 +64,8 @@
         </div>
       </div>
       <!-- edit form -->
-      <div class="div" v-else>
-        <form class="bg-dark" @submit="editAccount">
+      <div class="div col-8 p-3" v-else>
+        <form class="bg-dark p-3 rounded" @submit="editAccount">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input
@@ -165,10 +165,12 @@
               <option>false</option>
             </select>
           </div>
-          <button class="btn btn-danger" @click="editing = false">
-            Cancel
-          </button>
-          <button class="btn btn-success ms-2">Submit</button>
+          <div class="text-end">
+            <button class="btn text btn-danger" @click="editing = false">
+              Cancel
+            </button>
+            <button class="btn btn-success ms-2">Submit</button>
+          </div>
         </form>
       </div>
     </div>
@@ -221,7 +223,7 @@ export default {
       },
       async editAccount() {
         try {
-          await accountService.editAccount(AppState.account);
+          await accountService.editAccount(AppState.activeProfile);
           Pop.toast("Account updated", "success");
           editing.value = false;
         } catch (error) {

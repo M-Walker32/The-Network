@@ -24,9 +24,12 @@
         <img class="postimg col-12" :src="post.imgUrl" />
         <p class="m-0 p-0">{{ post.body }}</p>
         <!-- here is the like button -->
-        <h5>
+        <h5 v-if="account.id">
           {{ post.likes.length
-          }}<i class="mdi mdi-cash-100 selectable" @click="likePost()"></i>
+          }}<i
+            class="mdi mdi-cash-100 text-secondary selectable"
+            @click="likePost(post)"
+          ></i>
         </h5>
       </div>
     </div>
@@ -71,9 +74,9 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
-      async likePost() {
+      async likePost(post) {
         try {
-          await postsService.likePost(route.params.id);
+          await postsService.likePost(post);
         } catch (error) {
           logger.error(error);
           Pop.toast(error.message, "error");

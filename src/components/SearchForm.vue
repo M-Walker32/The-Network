@@ -6,7 +6,6 @@
         v-model="query"
         type="text"
         name="search"
-        required
         class="form-control bg-white"
         placeholder="search matching posts"
       />
