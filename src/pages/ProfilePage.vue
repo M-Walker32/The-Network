@@ -1,7 +1,6 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <!-- if NOT !editing here -->
       <div class="d-flex" v-if="!editing">
         <div class="col-4 text-light">
           <div class="p-2">
